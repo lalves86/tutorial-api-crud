@@ -85,35 +85,12 @@ app.put('/projects/:id', checkUserExists, (req, res) => {
   return res.json(projects);
 });
 
-app.put('/projects/:id/tasks/:taskId', (req, res) => {
-  const { id, taskId } = req.params;
-  const { title } = req.body;
-
-  const project = projects.find(project => project.id == id);
-  
-
-  project.tasks[taskId] = title;
-
-  return res.json(projects);
-});
-
 app.delete('/projects/:id', checkUserExists, (req, res) => {
   const { id } = req.params;
 
   const projectIndex = projects.findIndex(project => project.id == id);
 
   projects.splice(projectIndex, 1);
-
-  return res.json(projects);
-});
-
-app.delete('/projects/:id/tasks/:taskId', (req, res) => {
-  const { id, taskId } = req.params;
-
-  const project = projects.find(project => project.id == id);
-  
-
-  project.tasks.splice(taskId);
 
   return res.json(projects);
 });
